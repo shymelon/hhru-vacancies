@@ -37,8 +37,9 @@ const groupBy = (objectArray, ...properties) => {
 };
 
 /**
- * @function countOcc
+ * @function countOccurrences подсчитывает количество уникальных вхождений
  * @param array
+ * @returns {Array<{name:count}>} возвращает массив из пары название:количество
  */
 const countOccurrences = (array) => {
     const result = {};
@@ -87,7 +88,7 @@ app.get('/:date', async (req,res) => {
             console.log(e)
         }
     }
-    await res.json(countOccurrences(data));
+    await res.json({data:countOccurrences(data)});
 });
 
 module.exports = app;
