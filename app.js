@@ -39,23 +39,25 @@ const groupBy = (objectArray, ...properties) => {
 /**
  * @function countOccurrences подсчитывает количество уникальных вхождений
  * @param array
- * @returns {Array<{name:count}>} возвращает массив из пары название:количество
+ * @returns {Array<{name: String, count: Number}>} возвращает массив из пары название:количество
  */
 const countOccurrences = (array) => {
-    const result = {};
+    const countResult = [];
+    const objectArray = [];
     if (array instanceof Array) {
         array.forEach(function (v, i) {
-            if (!result[v]) {
-                result[v] = [i];
+            if (!countResult[v]) {
+                countResult[v] = [i];
             } else {
-                result[v].push(i);
+                countResult[v].push(i);
             }
         });
-        Object.keys(result).forEach(function (v) {
-            result[v] = result[v].length;
+        Object.keys(countResult).forEach(function (v) {
+            const profObject = {prof: v, count: countResult[v].length}
+            objectArray.push(profObject)
         });
     }
-    return result;
+    return objectArray;
 };
 
 app.get('/:date', async (req,res) => {
